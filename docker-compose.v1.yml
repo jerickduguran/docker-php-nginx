@@ -1,0 +1,19 @@
+version: '3.7'
+services:
+    web:
+        image: nginx:latest
+        ports:
+            - "80:80"
+        volumes:
+            - .:/usr/share/nginx/html
+            - ./default.conf:/etc/nginx/conf.d/default.conf
+        links:
+            - my_php
+    my_php: 
+        build:
+            context: .  
+            dockerfile: Dockerfile
+        # image: php:7.2-fpm 
+        # dockerfile: Dockerfile 
+        volumes:
+            - .:/usr/share/nginx/html

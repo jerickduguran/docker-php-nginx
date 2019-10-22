@@ -1,0 +1,17 @@
+version: '3.7'
+services:
+    nginx:  
+        container_name: nginx
+        build: ./docker/nginx
+        ports:
+            - "80:80"
+            # - "443:443"
+        volumes:
+            - .:/var/www/html
+        depends_on:
+            - webapp
+    webapp: 
+        container_name: webapp
+        build: ./docker/php/php-fpm73
+        volumes:
+            - .:/var/www/html
